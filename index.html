@@ -22,32 +22,36 @@
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen transition-colors duration-300">
 
     <!-- Top Header Navigation -->
-    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <div class="p-2.5 bg-gradient-to-tr from-brand-600 to-eps-600 text-white rounded-xl shadow-lg shadow-brand-500/20">
-                    <i data-lucide="building-2" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight">
-                        Análise de Processo & Gestão Ambiental
-                    </h1>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">
-                        Engenharia e Sustentabilidade para Edificações de Alto Padrão
-                    </p>
+    <header class="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 header-grid">
+            <div class="flex items-center min-w-0">
+                <img src="references/logo-unb-epr.png" alt="UnB - Departamento de Engenharia de Produção" class="unb-logo">
+            </div>
+
+            <div class="header-title text-center min-w-0">
+                <h1 class="font-bold text-lg sm:text-2xl text-slate-900 dark:text-white leading-tight">
+                    Introdução ao Desenvolvimento Sustentável - IDS
+                </h1>
+                <p class="text-[10px] sm:text-xs font-bold tracking-[0.18em] uppercase text-emerald-600 dark:text-emerald-400 mt-1">Análise comparativa e gestão ambiental</p>
+                <div class="header-systems flex items-center justify-center gap-2 mt-2">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-cyan-100 text-cyan-800 dark:bg-cyan-950/80 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
+                        <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
+                        EPS Monolítico Tipo F
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-950/80 dark:text-orange-300 border border-orange-200 dark:border-orange-800">
+                        <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                        Alvenaria Tradicional
+                    </span>
                 </div>
             </div>
 
-            <!-- System Status Badges & Dark Mode Switch -->
-            <div class="flex items-center gap-3 flex-wrap sm:flex-nowrap">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-100 text-cyan-800 dark:bg-cyan-950/80 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
-                    <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
-                    EPS Monolítico Tipo F
-                </span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-950/80 dark:text-orange-300 border border-orange-200 dark:border-orange-800">
-                    <span class="w-2 h-2 rounded-full bg-orange-500"></span>
-                    Alvenaria Tradicional
-                </span>
+            <!-- Professores e tema -->
+            <div class="header-meta flex items-center justify-end gap-3 flex-wrap">
+                <div class="professors text-right text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <span class="block font-bold text-slate-800 dark:text-slate-100">Professores</span>
+                    <span class="block">Profa. Tálita Floriano dos Santos</span>
+                    <span class="block">Mauro GM Cappellaro</span>
+                </div>
 
                 <button id="themeToggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Alternar Tema">
                     <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>

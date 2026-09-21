@@ -39,6 +39,60 @@
             box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
         }
 
+        .header-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .unb-logo {
+            display: block;
+            width: min(100%, 250px);
+            height: auto;
+            max-height: 58px;
+            object-fit: contain;
+            object-position: left center;
+        }
+
+        .header-meta {
+            min-width: 0;
+        }
+
+        @media (max-width: 1100px) {
+            .header-grid {
+                grid-template-columns: minmax(170px, 0.9fr) minmax(250px, 1.2fr);
+            }
+
+            .header-meta {
+                grid-column: 1 / -1;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+                text-align: center;
+            }
+
+            .unb-logo {
+                width: min(100%, 270px);
+                max-height: 52px;
+                margin: 0 auto;
+            }
+
+            .header-meta {
+                justify-content: center;
+            }
+
+            .professors {
+                text-align: center;
+                width: 100%;
+            }
+        }
+
         .input-control {
             width: 100%;
             border: 1px solid #475569;
