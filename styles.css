@@ -1,0 +1,71 @@
+/* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        /* Large Flow Arrow Styling */
+        .flow-arrow-body {
+            position: relative;
+            background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+        }
+        .flow-arrow-head {
+            width: 0;
+            height: 0;
+            border-top: 36px solid transparent;
+            border-bottom: 36px solid transparent;
+            border-left: 36px solid #0f172a;
+        }
+
+        /* Pulse glow effect */
+        .glow-active {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+        .glow-active-trad {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+        }
+
+        .input-control {
+            width: 100%;
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 0.6rem 0.7rem;
+            font-size: 0.75rem;
+            outline: none;
+            transition: border-color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .input-control:focus {
+            border-color: #34d399;
+            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.18);
+        }
+
+        .stage-editor {
+            border: 1px solid #334155;
+            border-radius: 0.75rem;
+            background: rgba(30, 41, 59, 0.72);
+            padding: 0.75rem;
+        }
+
+        .stage-editor summary {
+            cursor: pointer;
+            color: #e2e8f0;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }

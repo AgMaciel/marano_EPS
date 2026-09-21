@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Processo e Gestão Ambiental Construtiva - EPS vs Tradicional</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        eps: {
+                            50: '#ecfeff',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            700: '#0e7490',
+                        },
+                        trad: {
+                            50: '#fff7ed',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom Styles for Timeline Arrows and Animations -->
+    <style>
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        /* Large Flow Arrow Styling */
+        .flow-arrow-body {
+            position: relative;
+            background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+        }
+        .flow-arrow-head {
+            width: 0;
+            height: 0;
+            border-top: 36px solid transparent;
+            border-bottom: 36px solid transparent;
+            border-left: 36px solid #0f172a;
+        }
+
+        /* Pulse glow effect */
+        .glow-active {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+        .glow-active-trad {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen transition-colors duration-300">
+
+    <!-- Top Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 bg-gradient-to-tr from-brand-600 to-eps-600 text-white rounded-xl shadow-lg shadow-brand-500/20">
+                    <i data-lucide="building-2" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight">
+                        Análise de Processo & Gestão Ambiental
+                    </h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                        Engenharia e Sustentabilidade para Edificações de Alto Padrão
+                    </p>
+                </div>
+            </div>
+
+            <!-- System Status Badges & Dark Mode Switch -->
+            <div class="flex items-center gap-3 flex-wrap sm:flex-nowrap">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-100 text-cyan-800 dark:bg-cyan-950/80 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
+                    <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
+                    EPS Monolítico Tipo F
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-950/80 dark:text-orange-300 border border-orange-200 dark:border-orange-800">
+                    <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                    Alvenaria Tradicional
+                </span>
+
+                <button id="themeToggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Alternar Tema">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+        <!-- SECTION 1: PERFIL DA EMPRESA E ESCOPO DE ATUAÇÃO -->
+        <section class="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-md relative overflow-hidden">
+            <div class="absolute -right-16 -top-16 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="briefcase" class="w-5 h-5 text-brand-600 dark:text-brand-500"></i>
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Perfil Corporativo & Diagnóstico Industrial</h2>
+                </div>
+                <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-md">
+                    Relatório Técnico 2026
+                </span>
+            </div>
+
+            <!-- Profile Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">Ramo de Atuação</span>
+                    <p class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+                        <i data-lucide="home" class="w-4 h-4 text-brand-500"></i>
+                        Construção de Luxo
+                    </p>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Casas de Alto Padrão</span>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">Porte da Empresa</span>
+                    <p class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-cyan-500"></i>
+                        Médio / Grande
+                    </p>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Atuação Região Sudeste</span>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">Quadro de Pessoal</span>
+                    <p class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+                        <i data-lucide="users" class="w-4 h-4 text-indigo-500"></i>
+                        ~120 Colaboradores
+                    </p>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Engenheiros, Técnicos & Operação</span>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">Tempo no Mercado</span>
+                    <p class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+                        <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
+                        15 Anos de Tradição
+                    </p>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Fundada em 2011</span>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 sm:col-span-2 lg:col-span-1">
+                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">Certificações</span>
+                    <p class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-1.5 flex-wrap">
+                        <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 rounded text-xs">ISO 14001</span>
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300 rounded text-xs">PBQP-H</span>
+                    </p>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Sistemas de Gestão Ambiental</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ALTERNADOR DE SISTEMAS E RESUMO EXECUTIVO -->
+        <section class="space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="sliders" class="w-5 h-5 text-brand-600"></i>
+                        Seleção de Módulo de Comparação Construtiva
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                        Alternar entre os métodos produtivos para atualizar os Inputs, Outputs e o Fluxograma em tempo real
+                    </p>
+                </div>
+
+                <!-- Toggle Controls -->
+                <div class="inline-flex p-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button id="btnEps" onclick="switchSystem('eps')" class="flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 bg-white dark:bg-slate-900 text-cyan-600 dark:text-cyan-400 shadow-md">
+                        <i data-lucide="layers" class="w-4 h-4"></i>
+                        EPS Monolítico (Ítalo-Americano)
+                    </button>
+                    <button id="btnTrad" onclick="switchSystem('trad')" class="flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                        <i data-lucide="boxes" class="w-4 h-4"></i>
+                        Alvenaria Tradicional (Tijolos)
+                    </button>
+                </div>
+            </div>
+
+            <!-- System Overview Banner -->
+            <div id="systemBanner" class="p-5 rounded-xl bg-cyan-50/70 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/60 transition-all">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <span id="bannerBadge" class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-cyan-200 text-cyan-900 dark:bg-cyan-900 dark:text-cyan-200">
+                            SISTEMA INDUSTRIALIZADO
+                        </span>
+                        <h3 id="bannerTitle" class="text-lg font-bold text-cyan-950 dark:text-cyan-100">
+                            Painéis Monolíticos em Poliestireno Expandido (EPS Tipo F) + Concreto Projetado
+                        </h3>
+                        <p id="bannerDesc" class="text-xs text-cyan-800 dark:text-cyan-300 max-w-4xl">
+                            A estrutura é formada por núcleos de EPS retardante de chamas revestidos por malhas de aço eletrosoldadas de alta resistência e recobertas com concreto micro-maciço/projetado. Elimina fôrmas de madeira, minimiza o peso próprio e oferece isoIamento térmico nativo.
+                        </p>
+                    </div>
+                    <div class="shrink-0 flex items-center gap-3">
+                        <div class="text-center px-3 py-1.5 bg-white/80 dark:bg-slate-900/80 rounded-lg border border-cyan-200/50 dark:border-cyan-800/50">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold block">Redução Resíduos</span>
+                            <span id="bannerMetric1" class="text-lg font-extrabold text-brand-600 dark:text-brand-400">-85%</span>
+                        </div>
+                        <div class="text-center px-3 py-1.5 bg-white/80 dark:bg-slate-900/80 rounded-lg border border-cyan-200/50 dark:border-cyan-800/50">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold block">Agilidade Obra</span>
+                            <span id="bannerMetric2" class="text-lg font-extrabold text-cyan-600 dark:text-cyan-400">+45%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: FLUXOGRAMA DE PROCESSO INTERATIVO FIEL AO MODELO -->
+        <section class="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-md space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="git-commit" class="w-6 h-6 text-brand-600"></i>
+                        Fluxograma do Processo Produtivo & Balanço Ambiental
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                        Representação conforme especificação visual: Entradas (Inputs) superiores, Linha de Produção e Saídas (Outputs) inferiores. Clique em uma etapa para inspecionar.
+                    </p>
+                </div>
+                <div class="text-xs text-slate-500 flex items-center gap-1.5">
+                    <i data-lucide="info" class="w-4 h-4 text-slate-400"></i>
+                    <span>Clique nos cards centrais para detalhar a etapa</span>
+                </div>
+            </div>
+
+            <!-- Flowchart Container -->
+            <div class="overflow-x-auto pb-6 pt-2">
+                <div class="min-w-[980px] space-y-4">
+                    
+                    <!-- TOP ROW: INPUTS (ENTRADAS) -->
+                    <div id="inputsRow" class="grid grid-cols-5 gap-4">
+                        <!-- Dynamic JS Populated -->
+                    </div>
+
+                    <!-- CONNECTOR ARROWS DOWN (TOP TO TIMELINE) -->
+                    <div class="grid grid-cols-5 gap-4 px-2">
+                        <div class="flex justify-center"><i data-lucide="arrow-down-right" class="w-5 h-5 text-emerald-500 animate-bounce"></i></div>
+                        <div class="flex justify-center"><i data-lucide="arrow-down" class="w-5 h-5 text-emerald-500 animate-bounce"></i></div>
+                        <div class="flex justify-center"><i data-lucide="arrow-down" class="w-5 h-5 text-emerald-500 animate-bounce"></i></div>
+                        <div class="flex justify-center"><i data-lucide="arrow-down" class="w-5 h-5 text-emerald-500 animate-bounce"></i></div>
+                        <div class="flex justify-center"><i data-lucide="arrow-down-left" class="w-5 h-5 text-emerald-500 animate-bounce"></i></div>
+                    </div>
+
+                    <!-- MIDDLE ROW: CENTRAL ARROW TIMELINE (STAGES) -->
+                    <div class="relative py-3">
+                        <div class="w-full bg-slate-900 dark:bg-slate-800 rounded-2xl p-2.5 shadow-xl flex items-center gap-2 relative overflow-hidden border border-slate-700">
+                            <!-- Background Arrow Accent -->
+                            <div class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-r from-transparent to-slate-800 dark:to-slate-900 pointer-events-none"></div>
+
+                            <div id="stagesRow" class="grid grid-cols-5 gap-2 w-full z-10">
+                                <!-- Dynamic JS Populated -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CONNECTOR ARROWS DOWN (TIMELINE TO BOTTOM OUTPUTS) -->
+                    <div class="grid grid-cols-5 gap-4 px-2">
+                        <div class="flex justify-center"><i data-lucide="arrow-down" class="w-5 h-5 text-red-500"></i></div>
+                        <div class="flex justify-center"><i data-lucide="arrow-down" class="w-5 h-5 text-red-500"></i></div>
+                        <div class="flex justify-center"><i data-lucide="arrow-down" class="w-5 h-5 text-red-500"></i></div>
+                        <div class="flex justify-center"><i data-lucide="arrow-down" class="w-5 h-5 text-red-500"></i></div>
+                        <div class="flex justify-center"><i data-lucide="arrow-down" class="w-5 h-5 text-red-500"></i></div>
+                    </div>
+
+                    <!-- BOTTOM ROW: OUTPUTS (SAÍDAS / EFLUENTES / RESÍDUOS) -->
+                    <div id="outputsRow" class="grid grid-cols-5 gap-4">
+                        <!-- Dynamic JS Populated -->
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PAINEL DE DETALHAMENTO DA ETAPA SELECIONADA -->
+        <section id="stageDetailsPanel" class="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border-2 border-brand-500/40 dark:border-brand-500/30 shadow-xl transition-all">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-3">
+                    <span id="detailStageNumber" class="w-10 h-10 rounded-xl bg-brand-600 text-white font-black text-lg flex items-center justify-center shadow-lg shadow-brand-500/30">
+                        1
+                    </span>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span id="detailSystemBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200 uppercase">
+                                EPS Monolítico
+                            </span>
+                            <span class="text-xs text-slate-400">• Etapa do Fluxograma</span>
+                        </div>
+                        <h3 id="detailStageTitle" class="text-xl font-extrabold text-slate-900 dark:text-white">
+                            Fundação e Nivelamento Estrutural
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg">
+                    <i data-lucide="clock" class="w-4 h-4 text-brand-500"></i>
+                    <span>Duração Estimada: <strong id="detailDuration" class="text-slate-800 dark:text-slate-200">12 dias</strong></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left Column: Detailed Description & Equipment -->
+                <div class="lg:col-span-2 space-y-5">
+                    <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
+                        <h4 class="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 mb-2 flex items-center gap-1.5">
+                            <i data-lucide="file-text" class="w-4 h-4 text-brand-500"></i>
+                            Descrição Detalhada Operacional
+                        </h4>
+                        <p id="detailDescription" class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                            Execução de radiier com arranques verticais em aço reforçado. No sistema EPS, o peso próprio reduzido da estrutura permite otimizar a espessura da fundação em até 25%, diminuindo o volume de concreto escavado.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
+                            <h4 class="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 mb-2 flex items-center gap-1.5">
+                                <i data-lucide="wrench" class="w-4 h-4 text-indigo-500"></i>
+                                Equipamentos & Maquinários
+                            </h4>
+                            <ul id="detailEquipment" class="text-xs text-slate-700 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+                                <li>Escavadeira Hidráulica</li>
+                                <li>Vibrador de Imersão</li>
+                                <li>Nível a Laser de Precisão</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
+                            <h4 class="text-xs uppercase font-bold text-slate-500 dark:text-slate-400 mb-2 flex items-center gap-1.5">
+                                <i data-lucide="package" class="w-4 h-4 text-emerald-500"></i>
+                                Insumos de Entrada (Inputs)
+                            </h4>
+                            <ul id="detailInputs" class="text-xs text-slate-700 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+                                <li>Aço CA-50/60</li>
+                                <li>Concreto Usinado C30</li>
+                                <li>Lona Plástica Impermeabilizante</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Environmental Mitigation System -->
+                <div class="bg-emerald-50/60 dark:bg-emerald-950/30 p-5 rounded-xl border border-emerald-200 dark:border-emerald-800/60 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-sm mb-3">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+                            Tratamento & Mitigação Ambiental (ISO 14001)
+                        </div>
+                        <p id="detailMitigation" class="text-xs text-emerald-900 dark:text-emerald-200 leading-relaxed">
+                            Controle de efluentes no canteiro através de caixa separadora de água e lama de concreto. Coleta seletiva imediata e reuso de sobras de fôrmas.
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-white/80 dark:bg-slate-900/80 rounded-lg border border-emerald-200/60 dark:border-emerald-800/60 space-y-1">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase block">Impacto de Resíduos na Etapa</span>
+                        <div class="flex items-center justify-between">
+                            <span id="detailWasteLevel" class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400">Baixo (~1.2 kg/m²)</span>
+                            <span id="detailWasteTag" class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 font-semibold">
+                                Eco-Eficiente
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: QUADRO COMPARATIVO E GRÁFICOS AMBIENTAIS INTERATIVOS -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Chart 1: Resíduos de Obra por m² -->
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+                            <i data-lucide="trash-2" class="w-5 h-5 text-red-500"></i>
+                            Geração de Resíduos Sólidos (Entulho kg/m²)
+                        </h3>
+                        <p class="text-xs text-slate-500">Volume descartado acumulado ao longo da construção</p>
+                    </div>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="wasteChart"></canvas>
+                </div>
+                <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-center justify-between">
+                    <span>Economia de entulho no EPS:</span>
+                    <strong class="text-brand-600 dark:text-brand-400 font-bold text-sm">~88% menos entulho</strong>
+                </div>
+            </div>
+
+            <!-- Chart 2: Ciclo de Vida e Pegada de Carbono -->
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+                            <i data-lucide="leaf" class="w-5 h-5 text-emerald-500"></i>
+                            Emissões CO₂ Eq & Consumo Energético HVAC (30 Anos)
+                        </h3>
+                        <p class="text-xs text-slate-500">Comparação em toneladas de CO₂ equivalente acumuladas</p>
+                    </div>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="carbonChart"></canvas>
+                </div>
+                <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-center justify-between">
+                    <span>Eficiência Térmica (HVAC):</span>
+                    <strong class="text-cyan-600 dark:text-cyan-400 font-bold text-sm">Redução de até 40% na conta de luz</strong>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SECTION 6: TABELA RESUMO EXECUTIVA DE DESEMPENHO -->
+        <section class="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-md space-y-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="table" class="w-6 h-6 text-brand-600"></i>
+                        Matriz Comparativa Térmico-Ambiental & Logística
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                        Parâmetros normativos NBR 15575 para habitações de alto padrão
+                    </p>
+                </div>
+            </div>
+
+            <!-- Table Container -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold border-b border-slate-200 dark:border-slate-700">
+                            <th class="p-3.5 rounded-tl-lg">Critério de Avaliação</th>
+                            <th class="p-3.5 text-cyan-700 dark:text-cyan-300 bg-cyan-50/50 dark:bg-cyan-950/30">EPS Monolítico + Concreto Armado</th>
+                            <th class="p-3.5 text-orange-700 dark:text-orange-300 bg-orange-50/50 dark:bg-orange-950/30 rounded-tr-lg">Alvenaria Tradicional (Tijolo)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-xs sm:text-sm">
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                            <td class="p-3.5 font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i data-lucide="thermometer" class="w-4 h-4 text-cyan-500"></i>
+                                Transmitância Térmica (U)
+                            </td>
+                            <td class="p-3.5 bg-cyan-50/20 dark:bg-cyan-950/10 font-bold text-emerald-600 dark:text-emerald-400">
+                                ~0.45 W/m²K (Excelente Isolamento)
+                            </td>
+                            <td class="p-3.5 bg-orange-50/20 dark:bg-orange-950/10 text-slate-700 dark:text-slate-300">
+                                ~2.20 W/m²K (Elevada Troca Térmica)
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                            <td class="p-3.5 font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i data-lucide="volume-2" class="w-4 h-4 text-indigo-500"></i>
+                                Isolamento Acústico
+                            </td>
+                            <td class="p-3.5 bg-cyan-50/20 dark:bg-cyan-950/10 font-bold text-emerald-600 dark:text-emerald-400">
+                                &gt; 45 dB (Massa + Amortecimento EPS)
+                            </td>
+                            <td class="p-3.5 bg-orange-50/20 dark:bg-orange-950/10 text-slate-700 dark:text-slate-300">
+                                ~38 a 41 dB (Depende da espessura do reboco)
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                            <td class="p-3.5 font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i data-lucide="flame" class="w-4 h-4 text-amber-500"></i>
+                                Comportamento ao Fogo
+                            </td>
+                            <td class="p-3.5 bg-cyan-50/20 dark:bg-cyan-950/10 font-bold text-slate-800 dark:text-slate-200">
+                                EPS Tipo F (Autoextinguível / Não Propaga)
+                            </td>
+                            <td class="p-3.5 bg-orange-50/20 dark:bg-orange-950/10 text-slate-700 dark:text-slate-300">
+                                Incombustível (Cerâmica inerte)
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                            <td class="p-3.5 font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i data-lucide="droplet" class="w-4 h-4 text-blue-500"></i>
+                                Consumo de Água na Obra
+                            </td>
+                            <td class="p-3.5 bg-cyan-50/20 dark:bg-cyan-950/10 font-bold text-emerald-600 dark:text-emerald-400">
+                                Redução de ~60% (Sem cura contínua de blocos)
+                            </td>
+                            <td class="p-3.5 bg-orange-50/20 dark:bg-orange-950/10 text-slate-700 dark:text-slate-300">
+                                Elevado (Preparo de argamassas e umectação)
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                            <td class="p-3.5 font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i data-lucide="scale" class="w-4 h-4 text-purple-500"></i>
+                                Peso Próprio da Parede
+                            </td>
+                            <td class="p-3.5 bg-cyan-50/20 dark:bg-cyan-950/10 font-bold text-emerald-600 dark:text-emerald-400">
+                                ~140 kg/m² (Alivia fundações)
+                            </td>
+                            <td class="p-3.5 bg-orange-50/20 dark:bg-orange-950/10 text-slate-700 dark:text-slate-300">
+                                ~260 kg/m² (Sobrecarga estrutural)
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                            <td class="p-3.5 font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i data-lucide="calendar" class="w-4 h-4 text-rose-500"></i>
+                                Tempo Médio para Casa de 500m²
+                            </td>
+                            <td class="p-3.5 bg-cyan-50/20 dark:bg-cyan-950/10 font-bold text-emerald-600 dark:text-emerald-400">
+                                5 a 7 Meses
+                            </td>
+                            <td class="p-3.5 bg-orange-50/20 dark:bg-orange-950/10 text-slate-700 dark:text-slate-300">
+                                12 a 16 Meses
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 7: GESTÃO AMBIENTAL E LOGÍSTICA REVERSA DO EPS -->
+        <section class="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border border-slate-800">
+            <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none">
+                <i data-lucide="recycle" class="w-96 h-96 text-emerald-500"></i>
+            </div>
+
+            <div class="relative z-10 space-y-6">
+                <div class="flex items-center gap-3">
+                    <div class="p-3 bg-emerald-500/20 border border-emerald-500/30 rounded-xl text-emerald-400">
+                        <i data-lucide="recycle" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white">
+                            Gestão de Logística Reversa & Segurança do EPS Tipo F
+                        </h2>
+                        <p class="text-xs text-slate-400">
+                            Compromisso ISO 14001: Ciclo de vida fechado e conformidade com normas contra incêndio
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Feature 1: EPS Tipo F -->
+                    <div class="p-5 bg-slate-800/60 rounded-xl border border-slate-700/60 space-y-3">
+                        <div class="flex items-center gap-2 text-amber-400 font-bold text-sm">
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                            Segurança do EPS Tipo F (Retardante)
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            O Poliestireno Expandido utilizado é do Tipo F (com aditivo retardante de chama). Na ausência de fonte externa de fogo, o material se extingue automaticamente. Não gera fumaça com toxidez letal superior à da madeira.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2: Logística Reversa -->
+                    <div class="p-5 bg-slate-800/60 rounded-xl border border-slate-700/60 space-y-3">
+                        <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+                            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                            100% Reciclabilidade das Sobras
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Aproximadamente 98% do volume do EPS é composto de ar. Retalhos de cortes são compactados no canteiro e retornam aos fabricantes para moagem e fabricação de novos blocos, mantas ou rodapés sintéticos.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3: Controle de Efluentes no Canteiro -->
+                    <div class="p-5 bg-slate-800/60 rounded-xl border border-slate-700/60 space-y-3">
+                        <div class="flex items-center gap-2 text-cyan-400 font-bold text-sm">
+                            <i data-lucide="droplets" class="w-5 h-5"></i>
+                            Tratamento de Água & Resíduos
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            O processo de projeção de argamassa utiliza lavadores de alta pressão com tanques de decantação alcalina, garantindo que o efluente hídrico seja neutralizado antes do descarte ou reutilizado na limpeza da obra.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <span>© 2026 Engenharia Construtiva de Alto Padrão - EPS vs Alvenaria Tradicional</span>
+            <div class="flex items-center gap-4">
+                <span class="hover:underline cursor-pointer">Sustentabilidade ISO 14001</span>
+                <span>•</span>
+                <span class="hover:underline cursor-pointer">PBQP-H Nível A</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+        // Data for EPS Monolítico System
+        const epsData = {
+            name: "Sistema Monolítico EPS Tipo F",
+            badgeClass: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
+            bannerTitle: "Painéis Monolíticos em EPS Tipo F + Concreto Projetado",
+            bannerDesc: "Estrutura tridimensional industrializada com núcleo térmico de Poliestireno Expandido (Tipo F autoextinguível), malhas de aço e micro-concreto jateado. Obra limpa, sem entulho de quebra e alta velocidade.",
+            metricWaste: "-88%",
+            metricSpeed: "+50%",
+            stages: [
+                {
+                    id: 1,
+                    title: "1. Fundação & Arranques",
+                    duration: "8 a 12 dias",
+                    input: "Aço CA-50, Concreto C30, Lona Plástica",
+                    output: "Resíduo Mínimo de Fôrmas, Água de Lavagem",
+                    description: "Execução de Radier ou Viga Baldrame otimizada. A leveza do sistema EPS reduz as cargas nas fundações em até 30%, exigindo menor escavação e menor volume de concreto usinado.",
+                    equipment: ["Escavadeira Compacta", "Nível Laser", "Vibrador de Concreto"],
+                    inputsList: ["Aço Estrutural CA-50/60", "Concreto Usinado C30", "Manta Impermeabilizante"],
+                    mitigation: "A água de lavagem dos caminhões de concreto passa por caixa de decantação alcalina antes da neutralização.",
+                    wasteLevel: "Muito Baixo (~1.0 kg/m²)",
+                    wasteTag: "Eco-Eficiente"
+                },
+                {
+                    id: 2,
+                    title: "2. Montagem dos Painéis EPS",
+                    duration: "10 a 15 dias",
+                    input: "Painéis EPS Tipo F, Malha Eletrosoldada, Grampos",
+                    output: "Retalhos Limpos de EPS (100% Recicláveis)",
+                    description: "Posicionamento e amarração dos painéis industriais de EPS reticulado. Os painéis vêm cortados de fábrica na medida exata do projeto executivo.",
+                    equipment: ["Alicate Pneumático", "Nível de Prumo", "Guindaste Leve / Escadas"],
+                    inputsList: ["Painéis EPS Tipo F (Autoextinguível)", "Telas de Aço Galvanizado", "Conectores de Precisão"],
+                    mitigation: "Todos os recortes de EPS são ensacados imediatamente e encaminhados para a fabricante para logística reversa e derretimento/reuso.",
+                    wasteLevel: "Praticamente Zero (~0.3 kg/m²)",
+                    wasteTag: "Reciclagem Total"
+                },
+                {
+                    id: 3,
+                    title: "3. Instalações Embutidas",
+                    duration: "5 a 8 dias",
+                    input: "Eletrodutos Flexíveis, Tubos PEX/PPR, Soprador Térmico",
+                    output: "Sem entulho de quebra! Apenas sobras plásticas",
+                    description: "Abertura de canaletas no EPS utilizando soprador térmico (ar quente). O EPS derrete localmente sem gerar poeira, ruído ou entulho sólido, permitindo o embutimento rápido das tubulações.",
+                    equipment: ["Soprador Térmico Industrial", "Pistola de Fixação", "Ferramental Manual"],
+                    inputsList: ["Tubulações PEX / PPR", "Eletrodutos Corrugados PEAD", "Caixas de Passagem"],
+                    mitigation: "A ausência de marretamento elimina a emissão de poeira e o ruído excessivo, protegendo a saúde ocupacional do canteiro.",
+                    wasteLevel: "Zero Entulho Cerâmico",
+                    wasteTag: "Obra Silenciosa & Limpa"
+                },
+                {
+                    id: 4,
+                    title: "4. Projeção de Concreto",
+                    duration: "12 a 18 dias",
+                    input: "Cimento, Areia Médio/Fina, Aditivos, Água",
+                    output: "Respingo Recuado de Argamassa, Efluente Hídrico",
+                    description: "Aplicação de duas camadas de micro-concreto/argamassa estrutural jateada via bomba pneumática sobre os dois lados do painel EPS, cobrindo totalmente o aço.",
+                    equipment: ["Projetora Pneu/Bomba de Concreto", "MCompressor de Ar", "Régua Alinhadora"],
+                    inputsList: ["Cimento CP-II / CP-V", "Agregado Miúdo Selecionado", "Aditivo Plastificante e Fibras"],
+                    mitigation: "Utilização de telas de contenção para retenção de respingos e reaproveitamento imediato da massa antes da pega no piso.",
+                    wasteLevel: "Baixo (~2.5 kg/m²)",
+                    wasteTag: "Controle de Respingo"
+                },
+                {
+                    id: 5,
+                    title: "5. Acabamento & Entrega",
+                    duration: "20 a 30 dias",
+                    input: "Massa Fina, Tintas Ecomateriais, Revestimentos",
+                    output: "Embalagens Recicláveis, Latas de Tinta",
+                    description: "Como as superfícies projetadas já saem perfeitamente aprumadas e niveladas, o consumo de massa de acabamento e tintas cai pela metade em relação à alvenaria tradicional.",
+                    equipment: ["Lixadeiras com Aspirador Integrado", "Desempenadeiras", "Pistola Airless"],
+                    inputsList: ["Argamassa Cimento Queimado/Pintura", "Gesso Apropriado", "Impermeabilizante"],
+                    mitigation: "Separação de latas e sacaria limpa enviadas para cooperativas locais parceiras da certificação ISO 14001.",
+                    wasteLevel: "Mínimo (~1.2 kg/m²)",
+                    wasteTag: "Pronto para Uso"
+                }
+            ]
+        };
+
+        // Data for Traditional Masonry System
+        const tradData = {
+            name: "Sistema Tradicional (Alvenaria Cerâmica)",
+            badgeClass: "bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200",
+            bannerTitle: "Estrutura Convencional de Concreto Armado + Tijolos Cerâmicos / Bloco",
+            bannerDesc: "Método artesanal contínuo com pilares, vigas, assentamento de tijolos, rasgos com ponteira para tubulações e reboco espesso. Elevada geração de entulho e maior pegada de carbono.",
+            metricWaste: "+450% Entulho",
+            metricSpeed: "Processo Lento",
+            stages: [
+                {
+                    id: 1,
+                    title: "1. Fundação & Fôrmas Madeira",
+                    duration: "15 a 22 dias",
+                    input: "Aço, Concreto, Muita Madeira para Fôrmas, Pregos",
+                    output: "Madeira Usada/Descarte, Sobras de Concreto",
+                    description: "Escavação profunda para sapatas/estacas e montagem de caixarias de madeira para vigas baldrames devido ao alto peso total da estrutura de alvenaria.",
+                    equipment: ["Escavadeira", "Serra Circular de Bancada", "Vibrador de Imersão"],
+                    inputsList: ["Madeira de Pinus/Tábua", "Aço CA-50", "Concreto C25/C30"],
+                    mitigation: "Reutilização parcial de tábuas de fôrma até o limite do desgaste; descarte em caçambas de entulho da construção civil.",
+                    wasteLevel: "Elevado (~12 kg/m²)",
+                    wasteTag: "Alto Desperdício Madeira"
+                },
+                {
+                    id: 2,
+                    title: "2. Elevação de Alvenaria",
+                    duration: "25 a 35 dias",
+                    input: "Tijolos Cerâmicos, Argamassa de Assentamento, Areia",
+                    output: "Tijolos Quebrados, Perda de Massa no Piso",
+                    description: "Assentamento manual tijolo por tijolo. Requer moldagem prévia de pilares e vigas de concreto armado (pilaral). Grande perda por transporte e quebras.",
+                    equipment: ["Betoneira 400L", "Colher de Pedreiro", "Prumo e Linha"],
+                    inputsList: ["Tijolos Cerâmicos 8 ou 9 Furos", "Cimento e Cal Hidratada", "Areia Média"],
+                    mitigation: "Acúmulo de cacos de tijolo no chão para varrição periódica e destinação via caçambas RCD.",
+                    wasteLevel: "Alto (~18 kg/m²)",
+                    wasteTag: "Perda por Perdas/Quebras"
+                },
+                {
+                    id: 3,
+                    title: "3. Rasgo para Tubulações",
+                    duration: "15 a 20 dias",
+                    input: "Marteletes, Discos de Corte, Tubos PVC/PPR",
+                    output: "Volume Crítico de Entulho Cerâmico e Poeira",
+                    description: "Após erguer a parede, as alvenarias são cortadas e quebradas com ponteiro/martelete para rasgar os caminhos de eletrodutos e canos de água.",
+                    equipment: ["Martelete Rompedor", "Lixadeira/Cortadora de Parede", "Talhadeiras"],
+                    inputsList: ["Tubulações PVC Esgoto/Água", "Eletrodutos Rígidos", "Argamassa de Chumbamento"],
+                    mitigation: "Uso obrigatório de máscaras PFF2 pelos operários; volume maciço de pó de tijolo e caçambas cheias de entulho.",
+                    wasteLevel: "Crítico (~25 kg/m²)",
+                    wasteTag: "Quebra e Entulho Massivo"
+                },
+                {
+                    id: 4,
+                    title: "4. Chapisco & Reboco Espesso",
+                    duration: "25 a 35 dias",
+                    input: "Argamassa de Reboco, Cal, Cimento, Água",
+                    output: "Massa Caída no Chão, Efluente com Areia/Cal",
+                    description: "Aplicação de camada espessa de reboco (2 a 4 cm) para corrigir falhas de prumo e desalinhamento dos tijolos assentados manualmente.",
+                    equipment: ["Betoneira", "Colher/Desempenadeira", "Andaimes Tubulares"],
+                    inputsList: ["Cimento", "Cal", "Areia Fina Selecionada", "Aditivos Vedantes"],
+                    mitigation: "Raspagem do piso ao final do expediente para remoção de argamassa curada caída.",
+                    wasteLevel: "Alto (~15 kg/m²)",
+                    wasteTag: "Desperdício por Revestimento"
+                },
+                {
+                    id: 5,
+                    title: "5. Acabamentos & Correções",
+                    duration: "30 a 45 dias",
+                    input: "Massa Corrida (Muitas Demãos), Tintas, Lixas",
+                    output: "Pó de Lixamento, Sobras de Revestimentos",
+                    description: "Correções extensas de imperfeições no reboco com massa corrida e gesso. Processo demorado devido aos tempos de cura da umidade retida nas paredes.",
+                    equipment: ["Lixadeiras", "Andaimes", "Rolo de Pintura"],
+                    inputsList: ["Massa Corrida PVA/Acrílica", "Tintas Látex", "Selador Acrílico"],
+                    mitigation: "Varrição contínua e transporte do pó residual para aterros sanitários licenciados.",
+                    wasteLevel: "Moderado (~6 kg/m²)",
+                    wasteTag: "Ajustes de Imperfeição"
+                }
+            ]
+        };
+
+        // Current Active System State
+        let currentSystem = 'eps'; // 'eps' or 'trad'
+        let currentStageId = 1;
+
+        
+        function renderFlowchart() {
+            const data = currentSystem === 'eps' ? epsData : tradData;
+            
+            const inputsRow = document.getElementById('inputsRow');
+            const stagesRow = document.getElementById('stagesRow');
+            const outputsRow = document.getElementById('outputsRow');
+
+            // Clear previous HTML
+            inputsRow.innerHTML = '';
+            stagesRow.innerHTML = '';
+            outputsRow.innerHTML = '';
+
+            data.stages.forEach(stage => {
+                const isSelected = stage.id === currentStageId;
+                
+                // 1. TOP INPUT CARD
+                const inputCard = document.createElement('div');
+                inputCard.className = `p-3 rounded-xl border text-xs shadow-sm transition-all duration-200 ${
+                    currentSystem === 'eps' 
+                    ? 'bg-emerald-50/80 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 text-emerald-950 dark:text-emerald-200'
+                    : 'bg-orange-50/80 dark:bg-orange-950/40 border-orange-300 dark:border-orange-800 text-orange-950 dark:text-orange-200'
+                }`;
+                inputCard.innerHTML = `
+                    <div class="flex items-center gap-1 font-bold text-[11px] mb-1 uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                        <i data-lucide="log-in" class="w-3.5 h-3.5"></i> Inputs (Entradas)
+                    </div>
+                    <p class="text-[11px] font-medium leading-snug">${stage.input}</p>
+                `;
+                inputsRow.appendChild(inputCard);
+
+                // 2. MIDDLE TIMELINE STAGE BUTTON
+                const stageBtn = document.createElement('button');
+                stageBtn.onclick = () => selectStage(stage.id);
+                
+                let btnStyle = "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700";
+                if (isSelected) {
+                    btnStyle = currentSystem === 'eps' 
+                        ? "bg-gradient-to-r from-brand-600 to-eps-600 text-white font-bold border-brand-400 glow-active scale-105" 
+                        : "bg-gradient-to-r from-orange-600 to-amber-600 text-white font-bold border-orange-400 glow-active-trad scale-105";
+                }
+
+                stageBtn.className = `p-3 rounded-xl border flex flex-col justify-between text-left transition-all duration-200 cursor-pointer h-full ${btnStyle}`;
+                stageBtn.innerHTML = `
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded ${isSelected ? 'bg-white/20 text-white' : 'bg-slate-700 text-slate-300'}">
+                            E${stage.id}
+                        </span>
+                        <i data-lucide="${isSelected ? 'check-circle' : 'circle'}" class="w-4 h-4"></i>
+                    </div>
+                    <span class="text-xs font-bold leading-tight block mb-1">${stage.title}</span>
+                    <span class="text-[10px] opacity-80 block">${stage.duration}</span>
+                `;
+                stagesRow.appendChild(stageBtn);
+
+                // 3. BOTTOM OUTPUT CARD
+                const outputCard = document.createElement('div');
+                outputCard.className = `p-3 rounded-xl border text-xs shadow-sm transition-all duration-200 ${
+                    currentSystem === 'eps'
+                    ? 'bg-slate-100 dark:bg-slate-800/80 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200'
+                    : 'bg-red-50/80 dark:bg-red-950/40 border-red-300 dark:border-red-800 text-red-950 dark:text-red-200'
+                }`;
+                outputCard.innerHTML = `
+                    <div class="flex items-center gap-1 font-bold text-[11px] mb-1 uppercase tracking-wider text-red-600 dark:text-red-400">
+                        <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Outputs (Saídas)
+                    </div>
+                    <p class="text-[11px] font-medium leading-snug">${stage.output}</p>
+                `;
+                outputsRow.appendChild(outputCard);
+            });
+
+            // Re-initialize icons for newly created DOM elements
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        function updateStageDetail() {
+            const data = currentSystem === 'eps' ? epsData : tradData;
+            const stage = data.stages.find(s => s.id === currentStageId) || data.stages[0];
+
+            document.getElementById('detailStageNumber').innerText = stage.id;
+            document.getElementById('detailStageTitle').innerText = stage.title;
+            document.getElementById('detailDuration').innerText = stage.duration;
+            document.getElementById('detailDescription').innerText = stage.description;
+            document.getElementById('detailMitigation').innerText = stage.mitigation;
+            document.getElementById('detailWasteLevel').innerText = stage.wasteLevel;
+            document.getElementById('detailWasteTag').innerText = stage.wasteTag;
+
+            const badge = document.getElementById('detailSystemBadge');
+            badge.innerText = data.name;
+            badge.className = `text-[10px] font-bold px-2 py-0.5 rounded uppercase ${data.badgeClass}`;
+
+            // Equipment List
+            const equipList = document.getElementById('detailEquipment');
+            equipList.innerHTML = stage.equipment.map(item => `<li>${item}</li>`).join('');
+
+            // Inputs List
+            const inputsList = document.getElementById('detailInputs');
+            inputsList.innerHTML = stage.inputsList.map(item => `<li>${item}</li>`).join('');
+        }
+
+        function selectStage(id) {
+            currentStageId = id;
+            renderFlowchart();
+            updateStageDetail();
+        }
+
+        function switchSystem(sys) {
+            currentSystem = sys;
+            
+            const btnEps = document.getElementById('btnEps');
+            const btnTrad = document.getElementById('btnTrad');
+            const banner = document.getElementById('systemBanner');
+
+            if (sys === 'eps') {
+                btnEps.className = "flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 bg-white dark:bg-slate-900 text-cyan-600 dark:text-cyan-400 shadow-md";
+                btnTrad.className = "flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+                
+                banner.className = "p-5 rounded-xl bg-cyan-50/70 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/60 transition-all";
+                document.getElementById('bannerBadge').innerText = "SISTEMA INDUSTRIALIZADO";
+                document.getElementById('bannerBadge').className = "inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-cyan-200 text-cyan-900 dark:bg-cyan-900 dark:text-cyan-200";
+                document.getElementById('bannerTitle').innerText = epsData.bannerTitle;
+                document.getElementById('bannerDesc').innerText = epsData.bannerDesc;
+                document.getElementById('bannerMetric1').innerText = epsData.metricWaste;
+                document.getElementById('bannerMetric2').innerText = epsData.metricSpeed;
+            } else {
+                btnTrad.className = "flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 bg-white dark:bg-slate-900 text-orange-600 dark:text-orange-400 shadow-md";
+                btnEps.className = "flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+                
+                banner.className = "p-5 rounded-xl bg-orange-50/70 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800/60 transition-all";
+                document.getElementById('bannerBadge').innerText = "MÉTODO CONVENCIONAL";
+                document.getElementById('bannerBadge').className = "inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-orange-200 text-orange-900 dark:bg-orange-900 dark:text-orange-200";
+                document.getElementById('bannerTitle').innerText = tradData.bannerTitle;
+                document.getElementById('bannerDesc').innerText = tradData.bannerDesc;
+                document.getElementById('bannerMetric1').innerText = tradData.metricWaste;
+                document.getElementById('bannerMetric2').innerText = tradData.metricSpeed;
+            }
+
+            renderFlowchart();
+            updateStageDetail();
+        }
+
+        let wasteChartInstance = null;
+        let carbonChartInstance = null;
+
+        function initCharts() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#cbd5e1' : '#475569';
+            const gridColor = isDark ? '#334155' : '#e2e8f0';
+
+            // 1. Waste Chart
+            const ctxWaste = document.getElementById('wasteChart').getContext('2d');
+            wasteChartInstance = new Chart(ctxWaste, {
+                type: 'bar',
+                data: {
+                    labels: ['Fundação', 'Estrutura/Parede', 'Tubulações/Rasgos', 'Revestimento', 'Acabamentos'],
+                    datasets: [
+                        {
+                            label: 'EPS Monolítico (kg/m²)',
+                            data: [1.0, 0.3, 0.1, 2.5, 1.2],
+                            backgroundColor: '#06b6d4',
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Alvenaria Tradicional (kg/m²)',
+                            data: [12.0, 18.0, 25.0, 15.0, 6.0],
+                            backgroundColor: '#f97316',
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: textColor, font: { family: 'Inter', size: 11 } } },
+                        tooltip: { mode: 'index', intersect: false }
+                    },
+                    scales: {
+                        x: { ticks: { color: textColor, font: { family: 'Inter', size: 10 } }, grid: { color: gridColor } },
+                        y: { 
+                            ticks: { color: textColor, font: { family: 'Inter', size: 10 } }, 
+                            grid: { color: gridColor },
+                            title: { display: true, text: 'kg de entulho por m²', color: textColor, font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+
+            // 2. Carbon Footprint Chart (30 year lifecycle)
+            const ctxCarbon = document.getElementById('carbonChart').getContext('2d');
+            carbonChartInstance = new Chart(ctxCarbon, {
+                type: 'line',
+                data: {
+                    labels: ['Ano 0 (Construção)', '5 Anos', '10 Anos', '15 Anos', '20 Anos', '30 Anos'],
+                    datasets: [
+                        {
+                            label: 'EPS Monolítico (Ton CO₂ Eq / Casa 500m²)',
+                            data: [65, 80, 95, 110, 125, 150],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Alvenaria Tradicional (Ton CO₂ Eq / Casa 500m²)',
+                            data: [95, 130, 165, 200, 235, 305],
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.05)',
+                            fill: true,
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: textColor, font: { family: 'Inter', size: 11 } } },
+                        tooltip: { mode: 'index', intersect: false }
+                    },
+                    scales: {
+                        x: { ticks: { color: textColor, font: { family: 'Inter', size: 10 } }, grid: { color: gridColor } },
+                        y: { 
+                            ticks: { color: textColor, font: { family: 'Inter', size: 10 } }, 
+                            grid: { color: gridColor },
+                            title: { display: true, text: 'Toneladas de CO₂ Acumuladas', color: textColor, font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Dark Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (wasteChartInstance && carbonChartInstance) {
+                wasteChartInstance.destroy();
+                carbonChartInstance.destroy();
+                initCharts();
+            }
+        });
+
+        // Initialize App on Window Load
+        window.onload = function() {
+            renderFlowchart();
+            updateStageDetail();
+            initCharts();
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        };
+    </script>
+</body>
+</html>
