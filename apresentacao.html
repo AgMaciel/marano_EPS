@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071b2b">
+    <title>Apresentação | IDS e Processos Construtivos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="apresentacao.css">
+</head>
+<body>
+    <header class="presentation-header">
+        <a class="brand" href="index.html" aria-label="Voltar ao relatório principal">
+            <img src="references/logo-unb-epr.png" alt="UnB - Departamento de Engenharia de Produção">
+        </a>
+        <div class="course-mark">
+            <span>Introdução ao Desenvolvimento Sustentável</span>
+            <strong>IDS / 2026</strong>
+        </div>
+        <div class="header-actions">
+            <span id="slideCounter" class="slide-counter">01 / 07</span>
+            <a class="back-link" href="index.html">Relatório completo <i data-lucide="arrow-up-right"></i></a>
+        </div>
+    </header>
+
+    <main class="deck" aria-live="polite">
+        <section class="slide slide-cover is-active" data-slide="1">
+            <div class="cover-content">
+                <p class="eyebrow">ANÁLISE COMPARATIVA E GESTÃO AMBIENTAL</p>
+                <h1>Do canteiro ao ciclo de vida.</h1>
+                <p class="cover-subtitle">Dois sistemas construtivos, uma decisão orientada por desempenho, resíduos e responsabilidade ambiental.</p>
+                <div class="cover-meta"><span>EPS monolítico Tipo F</span><span>Alvenaria tradicional</span></div>
+                <p class="presenters">Profa. Tálita Floriano dos Santos<br>Mauro GM Cappellaro</p>
+            </div>
+            <div class="cover-visual" aria-label="Ilustração de comparação entre os dois processos">
+                <div class="sun-disc"></div>
+                <div class="building building-eps"><span class="building-label">EPS</span><i data-lucide="layers"></i></div>
+                <div class="building building-trad"><span class="building-label">TRAD</span><i data-lucide="brick-wall"></i></div>
+                <div class="ground-line"></div>
+                <span class="visual-note note-eps">industrializado</span><span class="visual-note note-trad">artesanal</span>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="2">
+            <div class="slide-heading"><p class="eyebrow">01 / O PROBLEMA</p><h2>Construir também é administrar fluxos.</h2><p>Entradas, decisões e saídas revelam onde o desempenho ambiental acontece de verdade.</p></div>
+            <figure class="flow-figure">
+                <img src="references/fluxo_eps.jpeg" alt="Fluxo do sistema EPS" />
+            </figure>
+            <div class="insight-bar"><i data-lucide="scan-search"></i><span>O mesmo resultado arquitetônico pode produzir impactos muito diferentes.</span></div>
+        </section>
+
+        <section class="slide" data-slide="3">
+            <div class="slide-heading"><p class="eyebrow cyan">02 / SISTEMA EPS</p><h2>Menos massa. Mais coordenação.</h2><p>O painel monolítico transforma a obra em uma sequência mais industrializada e previsível.</p></div>
+            <div class="process-layout">
+                <div class="process-illustration eps-scene"><div class="scene-sky"></div><div class="scene-floor"></div><div class="eps-panel panel-one"></div><div class="eps-panel panel-two"></div><div class="steel-mesh"></div><div class="spray-cloud"></div><span class="scene-tag tag-panel">painel EPS Tipo F</span><span class="scene-tag tag-concrete">concreto projetado</span><i class="scene-icon" data-lucide="layers-3"></i></div>
+                <div class="process-facts"><div class="fact-row"><span>01</span><div><strong>Montagem a seco</strong><p>Painéis cortados conforme o projeto reduzem ajustes e perdas.</p></div></div><div class="fact-row"><span>02</span><div><strong>Instalações integradas</strong><p>Canaletas no núcleo de EPS evitam rasgos e poeira cerâmica.</p></div></div><div class="fact-row"><span>03</span><div><strong>Fechamento rápido</strong><p>Malha de aço e concreto projetado formam o envelope estrutural.</p></div></div><div class="metric-strip"><strong>−88%</strong><span>entulho estimado</span><strong>+50%</strong><span>agilidade estimada</span></div></div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4">
+            <div class="slide-heading"><p class="eyebrow orange">03 / SISTEMA TRADICIONAL</p><h2>Robusto, conhecido, intensivo.</h2><p>A alvenaria cerâmica depende de mais etapas manuais, correções e movimentação de materiais.</p></div>
+            <div class="process-layout reverse-mobile"><div class="process-facts"><div class="fact-row"><span>01</span><div><strong>Estrutura e fôrmas</strong><p>Maior peso próprio exige fundações e caixarias mais intensas.</p></div></div><div class="fact-row"><span>02</span><div><strong>Elevação manual</strong><p>Tijolo a tijolo, com perdas associadas a transporte e quebras.</p></div></div><div class="fact-row"><span>03</span><div><strong>Rasgos e correções</strong><p>Instalações embutidas geram poeira, entulho e retrabalho.</p></div></div><div class="metric-strip orange-strip"><strong>25 kg/m²</strong><span>pico de entulho</span><strong>12–16</strong><span>meses estimados</span></div></div><div class="process-illustration trad-scene"><div class="scene-sky"></div><div class="scene-floor"></div><div class="brick-wall"></div><div class="mortar-line line-one"></div><div class="mortar-line line-two"></div><div class="dust-cloud"></div><span class="scene-tag tag-brick">tijolos cerâmicos</span><span class="scene-tag tag-waste">entulho de rasgo</span><i class="scene-icon" data-lucide="brick-wall"></i></div></div>
+        </section>
+
+        <section class="slide" data-slide="5">
+            <div class="slide-heading"><p class="eyebrow">04 / COMPARAÇÃO</p><h2>O impacto aparece na curva.</h2><p>Uma leitura rápida dos indicadores que orientam a escolha do sistema.</p></div>
+            <div class="comparison-grid"><div class="comparison-card eps-card"><div class="comparison-top"><span class="dot cyan-dot"></span><strong>EPS monolítico</strong><span>01</span></div><div class="bar-label"><span>Resíduos sólidos</span><b>4,1 kg/m²</b></div><div class="bar"><i style="width:18%"></i></div><div class="bar-label"><span>Tempo de obra</span><b>5–7 meses</b></div><div class="bar"><i style="width:42%"></i></div><div class="bar-label"><span>Recuperação de sobras</span><b>alta</b></div><div class="bar"><i style="width:86%"></i></div></div><div class="vs-mark">VS</div><div class="comparison-card trad-card"><div class="comparison-top"><span class="dot orange-dot"></span><strong>Alvenaria tradicional</strong><span>02</span></div><div class="bar-label"><span>Resíduos sólidos</span><b>76 kg/m²</b></div><div class="bar"><i style="width:92%"></i></div><div class="bar-label"><span>Tempo de obra</span><b>12–16 meses</b></div><div class="bar"><i style="width:85%"></i></div><div class="bar-label"><span>Recuperação de sobras</span><b>moderada</b></div><div class="bar"><i style="width:35%"></i></div></div></div>
+            <div class="footnote">Indicadores de referência do estudo comparativo. Valores devem ser ajustados pelo diagnóstico e pelo projeto executivo.</div>
+        </section>
+
+        <section class="slide" data-slide="6">
+            <div class="slide-heading"><p class="eyebrow green">05 / GESTÃO AMBIENTAL</p><h2>O resíduo não termina na caçamba.</h2><p>Um SGA transforma prevenção, rastreabilidade e logística reversa em rotina operacional.</p></div>
+            <div class="loop-layout"><div class="loop-visual"><div class="loop-ring"><span class="loop-center">SGA<br><small>ISO 14001</small></span><span class="loop-point point-a">prevenir</span><span class="loop-point point-b">separar</span><span class="loop-point point-c">reutilizar</span><span class="loop-point point-d">medir</span></div></div><div class="management-list"><div><i data-lucide="droplets"></i><strong>Efluentes</strong><span>decantação, neutralização e reuso da água de lavagem</span></div><div><i data-lucide="wind"></i><strong>Poeira e ruído</strong><span>técnica construtiva e proteção ocupacional desde a etapa de projeto</span></div><div><i data-lucide="refresh-cw"></i><strong>Logística reversa</strong><span>retalhos de EPS compactados e devolvidos à cadeia produtiva</span></div><div><i data-lucide="clipboard-check"></i><strong>Evidência</strong><span>indicadores de reaproveitamento e destinação documentada</span></div></div></div>
+        </section>
+
+        <section class="slide slide-close" data-slide="7">
+            <div class="close-content"><p class="eyebrow">06 / CONCLUSÃO</p><h2>Desempenho é uma escolha de projeto.</h2><p>Comparar processos é tornar visível o que o canteiro consome, transforma e devolve ao ambiente.</p><div class="closing-line"><span></span><strong>Planejar. Construir. Regenerar.</strong><span></span></div><a class="primary-link" href="index.html">Abrir relatório interativo <i data-lucide="arrow-right"></i></a></div><div class="close-stamp"><span>IDS</span><small>UNB / 2026</small></div></section>
+    </main>
+
+    <nav class="slide-controls" aria-label="Controles da apresentação">
+        <button id="prevSlide" type="button" title="Slide anterior"><i data-lucide="arrow-left"></i></button>
+        <div id="slideDots" class="slide-dots"></div>
+        <button id="nextSlide" type="button" title="Próximo slide"><i data-lucide="arrow-right"></i></button>
+        <button id="fullscreen" type="button" title="Tela cheia"><i data-lucide="maximize"></i></button>
+    </nav>
+    <p class="keyboard-hint">Use ← → para navegar · F para tela cheia</p>
+    <script src="apresentacao.js"></script>
+</body>
+</html>
